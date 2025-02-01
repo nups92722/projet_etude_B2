@@ -1,5 +1,3 @@
-import pandas as pd
-
 def create_suburb_regionname_mapping(data):
     # Remove rows with no region name
     regional_data = data.dropna(subset=['Regionname'])
@@ -24,23 +22,9 @@ def create_suburb_regionname_mapping(data):
             )
     return suburb_region_mapping
 
-# Function to request the name of the JSON file to be loaded
-def get_json_filename():
-    filename = input("Enter the name of the JSON file to load (default: data.json): ").strip()
-    return filename if filename else "data.json"
-
-def main(): 
+def parsing_regionnname(data) :
+    # List to store the indexes of rows that should be removed from the dataset
     indexes_to_remove = []
-    
-    # Get the filename of the JSON file to be parsed
-    filename = get_json_filename()
-
-    # Load data
-    data = pd.read_json(filename)
-
-    # Remove rows with missing values in important columns
-    data = data.dropna(subset=['Price'])
-    data = data.dropna(subset=['Suburb'])
     
     # Create mapping of suburbs to regions
     suburb_region_mapping = create_suburb_regionname_mapping(data)
@@ -56,6 +40,7 @@ def main():
     
     # Drop incorrect rows
     data = data.drop(indexes_to_remove)
-
-if __name__ == "__main__":
-    main()
+    
+    print ("End function : parsing_regionnname")
+    
+    return (data)

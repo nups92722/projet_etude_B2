@@ -30,7 +30,3 @@ def request_output_filename(description_file, default_file):
                     return (filename)
                 elif checking == "no" or not checking:
                     break
-        
-
-truc = request_output_filename("", "test.hj")
-print(truc)

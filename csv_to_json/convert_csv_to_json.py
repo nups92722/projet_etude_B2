@@ -22,6 +22,3 @@ def convert_csv_to_json():
     except Exception as e:
         print(f"Error during conversion: {e}")
         return (False)
-
-if __name__ == "__main__":
-    convert_csv_to_json()

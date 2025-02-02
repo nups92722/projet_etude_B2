@@ -1,23 +1,17 @@
 import pandas as pd
 
-from parsing_regionname import parsing_regionnname
-from parsing_construction_year import parsing_construction_year
-
-# Function to request the name of the JSON file to be loaded
-def get_json_filename():
-    filename = input("Enter the name of the JSON file to load (default: data.json): ").strip()
-    return filename if filename else "data.json"
+from parsing.parsing_regionname import parsing_regionnname
+from parsing.parsing_construction_year import parsing_construction_year
+from utils.file_input_functions import get_file_to_load
+from utils.file_input_functions import request_output_filename
 
 def load_data():
     # Get the filename of the JSON file to be parsed
-    filename = get_json_filename()
+    filename = get_file_to_load("json", "data.json")
     try:
         # Load data
         data = pd.read_json(filename)
         print("File loaded successfully!")
-    except FileNotFoundError:
-        print(f"Error: The file '{filename}' does not exist.")
-        return (None)
     except ValueError:
         print(f"Error: The file '{filename}' is not a valid JSON file.")
         return (None)
@@ -26,12 +20,14 @@ def load_data():
     return (data)
 
 
-def main(): 
+def parsing(): 
     # Load data
     data = load_data()
 
     if data is None:
         return (False)
+    
+    output_filename = request_output_filename("json", "data.json")
 
     # Remove rows with missing values in important columns
     data = data.dropna(subset=['Price'])
@@ -40,7 +36,4 @@ def main():
     data = parsing_regionnname(data)
     data = parsing_construction_year(data)
     
-    
-
-if __name__ == "__main__":
-    main()
+    data.to_json(output_filename, orient="records", indent=4)

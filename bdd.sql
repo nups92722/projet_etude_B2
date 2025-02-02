@@ -10,8 +10,6 @@ DROP TABLE IF EXISTS property;
 CREATE TABLE region ( 
 	id_region           INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	label               VARCHAR(255),
-	municipal_zone      VARCHAR(255),
-	property_count      INT UNSIGNED      
 );
 
 CREATE TABLE suburb ( 
@@ -49,7 +47,7 @@ CREATE TABLE property (
 	construction_year    YEAR,
 	latitude             FLOAT,
 	longitude            FLOAT,
-	address              VARCHAR(255),
+	property_address     VARCHAR(255),
 	id_seller            INT UNSIGNED,
 	id_property_type     INT UNSIGNED,
 	id_sales_method      INT UNSIGNED,

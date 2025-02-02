@@ -4,25 +4,11 @@ from parsing.parsing_regionname import parsing_regionnname
 from parsing.parsing_construction_year import parsing_construction_year
 from utils.file_input_functions import get_file_to_load
 from utils.file_input_functions import request_output_filename
-
-def load_data():
-    # Get the filename of the JSON file to be parsed
-    filename = get_file_to_load("json", "data.json")
-    try:
-        # Load data
-        data = pd.read_json(filename)
-        print("File loaded successfully!")
-    except ValueError:
-        print(f"Error: The file '{filename}' is not a valid JSON file.")
-        return (None)
-    except Exception as e:
-        print(f"Unexpected error: {e}")
-    return (data)
-
+from utils.load_json_data import load_json_data
 
 def parsing(): 
     # Load data
-    data = load_data()
+    data = load_json_data("data.json")
 
     if data is None:
         return (False)

@@ -9,13 +9,14 @@ DROP TABLE IF EXISTS property;
 
 CREATE TABLE region ( 
 	id_region           INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-	label               VARCHAR(255),
+	label               VARCHAR(255)
 );
 
 CREATE TABLE suburb ( 
 	id_suburb          INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-	name               VARCHAR(255) NOT NULL,
+	label               VARCHAR(255) NOT NULL,
 	distance_to_city_center INT UNSIGNED NOT NULL,
+	property_count		INT UNSIGNED,
 	id_region          INT UNSIGNED,
 	CONSTRAINT fk_suburb_region FOREIGN KEY (id_region) REFERENCES region(id_region) ON DELETE RESTRICT
 );
